@@ -18,5 +18,5 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: |
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
-          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` test-vercel-alias.vercel.app
+          deployURL="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
+          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set $deployURL test-vercel-alias.vercel.app
